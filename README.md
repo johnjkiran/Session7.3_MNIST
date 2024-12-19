@@ -3,21 +3,26 @@
 A Convolutional Neural Network (CNN) implementation for MNIST digit classification using PyTorch.
 
 ## Project Structure 
-- `model.py` - Contains the CNN architecture
+- `model_13.py` - Contains the optimized CNN architecture
 - `train.py` - Training script
 - `requirements.txt` - Project dependencies
 - `evaluate_model.py` - Script to evaluate saved models
 
-## Model Architecture
-The model consists of 7 convolutional layers with max pooling and ReLU activation functions:
+## Model Architecture (Model_13)
+The model uses an efficient architecture with:
+- Input Block: Expansion layers (1→10→16 channels)
+- Feature Extraction: Channel reduction (16→8) followed by focused extraction (8→16)
+- Batch Normalization after each convolution
+- Strategic dropout (5% early, 2.5% later layers)
+- Global Average Pooling for final output
 - Input: 28x28 grayscale images
 - Output: 10 classes (digits 0-9)
 
 ## Best Model Performance
-Model checkpoint: mnist_model_20241220_025658.pth
+Model checkpoint: mnist_model_20241220_040419.pth
 - Epoch: 10
-- Training Accuracy: 99.54%
-- Test Accuracy: 99.36%
+- Training Accuracy: 98.34%
+- Test Accuracy: 99.19%
 
 ## Setup and Installation
 

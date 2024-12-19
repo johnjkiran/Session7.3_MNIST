@@ -4,7 +4,7 @@ import torch.optim as optim
 from torchvision import datasets, transforms
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
-from model_12 import Model_12
+from model_13 import Model_13
 from tqdm import tqdm
 import datetime
 import os
@@ -40,9 +40,10 @@ class Cutout(object):
 def data_set(cuda):    
     # Train Phase transformations
     train_transforms = transforms.Compose([
+
                                         #  transforms.Resize((28, 28)),
                                         #  transforms.ColorJitter(brightness=0.10, contrast=0.1, saturation=0.10, hue=0.1),
-                                        # transforms.RandomRotation((-8.0, 8.0), fill=(1,)),
+                                        transforms.RandomRotation((-8.0, 8.0), fill=(1,)),
                                         # transforms.RandomAffine(
                                         #     degrees=0, 
                                         #     translate=(0.08, 0.08),
@@ -51,7 +52,7 @@ def data_set(cuda):
                                         # ),
                                         transforms.ToTensor(),
                                         transforms.Normalize((0.1307,), (0.3081,)),
-                                        #Cutout(length=6)
+                                        Cutout(length=6)
                                         ])
 
     # Test Phase transformations
@@ -90,7 +91,7 @@ def model_param():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # Initialize model
     print(device)
-    model = Model_12().to(device)
+    model = Model_13().to(device)
     
     # Print model summary safely
     try:
@@ -205,10 +206,8 @@ if __name__ == "__main__":
     test_losses = []
     train_acc = []
     test_acc = []
-    # optimizer = optim.Adam(model.parameters(), lr=0.01, weight_decay=1e-5)
-    # scheduler = StepLR(optimizer, step_size=8, gamma=0.5)
-    optimizer = optim.SGD(model.parameters(), lr=0.015, momentum=0.9)
-    # scheduler = StepLR(optimizer, step_size=5, gamma=0.5)
+    optimizer = optim.SGD(model.parameters(), lr=0.015, momentum=0.9, weight_decay=5e-4)
+    scheduler = StepLR(optimizer, step_size=5, gamma=0.5)
 
     EPOCHS = 15
     timestamp = get_timestamp()
