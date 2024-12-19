@@ -4,7 +4,7 @@ import torch.optim as optim
 from torchvision import datasets, transforms
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
-from model import Model_1
+from model_12 import Model_12
 from tqdm import tqdm
 import datetime
 import os
@@ -90,7 +90,7 @@ def model_param():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # Initialize model
     print(device)
-    model = Model_1().to(device)
+    model = Model_12().to(device)
     
     # Print model summary safely
     try:
@@ -140,7 +140,7 @@ def train(model, device, train_loader, optimizer, epoch):
     correct += pred.eq(target.view_as(pred)).sum().item()
     processed += len(data)
 
-    pbar.set_description(desc= f'Loss={loss.item()} Batch_id={batch_idx} Accuracy={100*correct/processed:0.2f}')
+    pbar.set_description(desc= f'Loss={loss.item()} Batch_id={batch_idx} Train Accuracy={100*correct/processed:0.2f}')
     train_acc.append(100*correct/processed)
 
 def test(model, device, test_loader):
@@ -180,6 +180,22 @@ def setup_logger():
     console_handler.setLevel(logging.INFO)
     logging.getLogger().addHandler(console_handler)
 
+def evaluate(model, device, data_loader, dataset_type="Test"):
+    model.eval()
+    loss = 0
+    correct = 0
+    with torch.no_grad():
+        for data, target in data_loader:
+            data, target = data.to(device), target.to(device)
+            output = model(data)
+            loss += F.nll_loss(output, target, reduction='sum').item()
+            pred = output.argmax(dim=1, keepdim=True)
+            correct += pred.eq(target.view_as(pred)).sum().item()
+
+    loss /= len(data_loader.dataset)
+    accuracy = 100. * correct / len(data_loader.dataset)
+    return accuracy
+
 if __name__ == "__main__":
     setup_logger()
     logging.info("Starting training...")
@@ -191,8 +207,7 @@ if __name__ == "__main__":
     test_acc = []
     # optimizer = optim.Adam(model.parameters(), lr=0.01, weight_decay=1e-5)
     # scheduler = StepLR(optimizer, step_size=8, gamma=0.5)
-    optimizer = optim.Adam(model.parameters())
-    # optimizer = optim.SGD(model.parameters(), lr=0.015, momentum=0.9, weight_decay=5e-4)
+    optimizer = optim.SGD(model.parameters(), lr=0.015, momentum=0.9)
     # scheduler = StepLR(optimizer, step_size=5, gamma=0.5)
 
     EPOCHS = 15
@@ -215,12 +230,23 @@ if __name__ == "__main__":
                 best_accuracy = accuracy
                 # Create models directory if it doesn't exist
                 os.makedirs("models", exist_ok=True)
+                model_save_path = f"models/mnist_model_{timestamp}.pth"
+                
+                # Get current training accuracy
+                model.eval()
+                train_accuracy = evaluate(model, device, train_loader, "Training")
+                
                 torch.save({
                     'epoch': epoch,
                     'model_state_dict': model.state_dict(),
                     'optimizer_state_dict': optimizer.state_dict(),
-                    'accuracy': accuracy,
+                    'test_accuracy': accuracy,
+                    'train_accuracy': train_accuracy,
                     'timestamp': timestamp
                 }, model_save_path)
-                print(f"Model saved to {model_save_path}")
-            logging.info(f"Epoch {epoch} completed. Accuracy: {accuracy:.2f}%")
+                
+                # Make the message more visible
+                save_message = f"\n{'='*50}\nNew best model saved to: {model_save_path}\nEpoch: {epoch}\nTraining Accuracy: {train_accuracy:.2f}%\nTest Accuracy: {accuracy:.2f}%\n{'='*50}\n"
+                print(save_message)
+                logging.info(save_message)
+            logging.info(f"Epoch {epoch} completed. Test Accuracy: {accuracy:.2f}%")
