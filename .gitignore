@@ -42,6 +42,9 @@ data/
 *.pkl
 *.h5
 
-# Logs
+# Logs and models
 *.log
-logs/ 
+logs/
+models/*
+# Exception: Include the best model
+!models/mnist_model_20241220_025658.pth
