@@ -1,0 +1,79 @@
+2024-12-20 04:04:19,875 - INFO - Starting training...
+2024-12-20 04:04:19,939 - INFO - EPOCH: 0
+2024-12-20 04:05:31,134 - INFO - 
+==================================================
+New best model saved to: models/mnist_model_20241220_040419.pth
+Epoch: 0
+Training Accuracy: 95.91%
+Test Accuracy: 97.55%
+==================================================
+
+2024-12-20 04:05:31,134 - INFO - Epoch 0 completed. Test Accuracy: 97.55%
+2024-12-20 04:05:31,134 - INFO - EPOCH: 1
+2024-12-20 04:06:33,020 - INFO - 
+==================================================
+New best model saved to: models/mnist_model_20241220_040419.pth
+Epoch: 1
+Training Accuracy: 97.45%
+Test Accuracy: 98.32%
+==================================================
+
+2024-12-20 04:06:33,020 - INFO - Epoch 1 completed. Test Accuracy: 98.32%
+2024-12-20 04:06:33,020 - INFO - EPOCH: 2
+2024-12-20 04:07:32,593 - INFO - 
+==================================================
+New best model saved to: models/mnist_model_20241220_040419.pth
+Epoch: 2
+Training Accuracy: 97.67%
+Test Accuracy: 98.59%
+==================================================
+
+2024-12-20 04:07:32,593 - INFO - Epoch 2 completed. Test Accuracy: 98.59%
+2024-12-20 04:07:32,593 - INFO - EPOCH: 3
+2024-12-20 04:08:37,808 - INFO - 
+==================================================
+New best model saved to: models/mnist_model_20241220_040419.pth
+Epoch: 3
+Training Accuracy: 98.01%
+Test Accuracy: 98.81%
+==================================================
+
+2024-12-20 04:08:37,809 - INFO - Epoch 3 completed. Test Accuracy: 98.81%
+2024-12-20 04:08:37,810 - INFO - EPOCH: 4
+2024-12-20 04:09:40,909 - INFO - 
+==================================================
+New best model saved to: models/mnist_model_20241220_040419.pth
+Epoch: 4
+Training Accuracy: 98.16%
+Test Accuracy: 98.90%
+==================================================
+
+2024-12-20 04:09:40,909 - INFO - Epoch 4 completed. Test Accuracy: 98.90%
+2024-12-20 04:09:40,909 - INFO - EPOCH: 5
+2024-12-20 04:10:25,076 - INFO - Epoch 5 completed. Test Accuracy: 98.74%
+2024-12-20 04:10:25,092 - INFO - EPOCH: 6
+2024-12-20 04:11:07,943 - INFO - Epoch 6 completed. Test Accuracy: 98.78%
+2024-12-20 04:11:07,943 - INFO - EPOCH: 7
+2024-12-20 04:11:52,718 - INFO - Epoch 7 completed. Test Accuracy: 98.75%
+2024-12-20 04:11:52,718 - INFO - EPOCH: 8
+2024-12-20 04:12:55,607 - INFO - 
+==================================================
+New best model saved to: models/mnist_model_20241220_040419.pth
+Epoch: 8
+Training Accuracy: 98.25%
+Test Accuracy: 99.19%
+==================================================
+
+2024-12-20 04:12:55,607 - INFO - Epoch 8 completed. Test Accuracy: 99.19%
+2024-12-20 04:12:55,607 - INFO - EPOCH: 9
+2024-12-20 04:13:38,727 - INFO - Epoch 9 completed. Test Accuracy: 98.96%
+2024-12-20 04:13:38,733 - INFO - EPOCH: 10
+2024-12-20 04:14:21,727 - INFO - Epoch 10 completed. Test Accuracy: 98.98%
+2024-12-20 04:14:21,727 - INFO - EPOCH: 11
+2024-12-20 04:15:04,524 - INFO - Epoch 11 completed. Test Accuracy: 99.06%
+2024-12-20 04:15:04,524 - INFO - EPOCH: 12
+2024-12-20 04:15:48,584 - INFO - Epoch 12 completed. Test Accuracy: 99.12%
+2024-12-20 04:15:48,584 - INFO - EPOCH: 13
+2024-12-20 04:16:39,258 - INFO - Epoch 13 completed. Test Accuracy: 98.94%
+2024-12-20 04:16:39,258 - INFO - EPOCH: 14
+2024-12-20 04:17:47,202 - INFO - Epoch 14 completed. Test Accuracy: 99.10%
